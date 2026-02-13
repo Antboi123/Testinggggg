@@ -69,4 +69,24 @@
       document.getElementById("existYes").onclick = existResponse;
       document.getElementById("existNo").onclick = existResponse;
 
-      yesBtn
+      yesBtn.disabled = true;
+      fakeNoBtn.disabled = true;
+    }
+
+    function existResponse() {
+      content.innerHTML += `<p class="Question">wow you exist?</p>`;
+      document.getElementById("existYes").disabled = true;
+      document.getElementById("existNo").disabled = true;
+    }
+
+    yesBtn.onclick = askName;
+
+    fakeNoBtn.onclick = function () {
+      fakeNoBtn.textContent = "YES";
+      fakeNoBtn.style.fontWeight = "bold";
+
+      fakeNoBtn.onclick = askName;
+    };
+  </script>
+</body>
+</html>
