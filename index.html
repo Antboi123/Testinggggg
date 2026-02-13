@@ -66,15 +66,21 @@
         <button id="existNo">No</button>
       `;
 
-      document.getElementById("existYes").onclick = existResponse;
-      document.getElementById("existNo").onclick = existResponse;
+      document.getElementById("existYes").onclick = existResponse1;
+      document.getElementById("existNo").onclick = existResponse2;
 
       yesBtn.disabled = true;
       fakeNoBtn.disabled = true;
     }
 
-    function existResponse() {
+    function existResponse1() {
       content.innerHTML += `<p class="Question">wow you exist?</p>`;
+      document.getElementById("existYes").disabled = true;
+      document.getElementById("existNo").disabled = true;
+    }
+    
+    function existResponse2() {
+      content.innerHTML += `<p class="Question">WHAT DO YOU MEAN YOU DONT EXIST</p>`;
       document.getElementById("existYes").disabled = true;
       document.getElementById("existNo").disabled = true;
     }
