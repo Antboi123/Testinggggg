@@ -22,15 +22,15 @@
     }
 
     button {
-      width: 120px;
+      width: 140px;
       height: 45px;
-      font-size: 20px;
+      font-size: 18px;
       border-radius: 30px;
       background-color: rgb(255, 200, 220);
       color: red;
       border: 2px solid red;
       cursor: pointer;
-      margin-right: 10px;
+      margin: 10px 10px 0 0;
     }
 
     #message {
@@ -48,38 +48,25 @@
   <button id="yesBtn">Yes</button>
   <button id="fakeNoBtn">No</button>
 
-  <p id="message"></p>
+  <div id="content"></div>
 
   <script>
     const yesBtn = document.getElementById("yesBtn");
     const fakeNoBtn = document.getElementById("fakeNoBtn");
-    const message = document.getElementById("message");
+    const content = document.getElementById("content");
 
-    function askNameAndGreet() {
+    function askName() {
       const name = prompt("What’s your name?");
+      if (!name || name.trim() === "") return;
 
-      if (name && name.trim() !== "") {
-        message.textContent = `Hi ${name}! 👋`;
-      } else {
-        message.textContent = "Hi mysterious person 👀";
-      }
+      content.innerHTML = `
+        <p id="message">Hi ${name} 👋</p>
+        <p class="Question">Are you existing?</p>
+        <button id="existYes">Yes</button>
+        <button id="existNo">No</button>
+      `;
 
-      // Optional: disable buttons after use
-      yesBtn.disabled = true;
-      fakeNoBtn.disabled = true;
-    }
+      document.getElementById("existYes").onclick = existResponse;
+      document.getElementById("existNo").onclick = existResponse;
 
-    // Real yes
-    yesBtn.addEventListener("click", askNameAndGreet);
-
-    // Fake no → turns into YES, then works like yes
-    fakeNoBtn.addEventListener("click", function () {
-      fakeNoBtn.textContent = "YES";
-      fakeNoBtn.style.fontWeight = "bold";
-
-      fakeNoBtn.removeEventListener("click", arguments.callee);
-      fakeNoBtn.addEventListener("click", askNameAndGreet);
-    });
-  </script>
-</body>
-</html>
+      yesBtn
