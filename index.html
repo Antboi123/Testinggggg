@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hello World!</title>
+  <meta charset="UTF-8">
+
+  <style>
+    body {
+      background-color: pink;
+      color: red;
+      font-family: sans-serif;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 35px;
+      text-shadow: 2px 2px 0 #222;
+    }
+
+    .Question {
+      font-size: 25px;
+    }
+
+    button {
+      width: 120px;
+      height: 45px;
+      font-size: 20px;
+      border-radius: 30px;
+      background-color: rgb(255, 200, 220);
+      color: red;
+      border: 2px solid red;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    #message {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Hello!</h1>
+
+  <p class="Question">Do you mind if you could tell me some stuff?</p>
+
+  <button id="yesBtn">Yes</button>
+  <button id="fakeNoBtn">No</button>
+
+  <p id="message"></p>
+
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const fakeNoBtn = document.getElementById("fakeNoBtn");
+    const message = document.getElementById("message");
+
+    function askNameAndGreet() {
+      const name = prompt("What’s your name?");
+
+      if (name && name.trim() !== "") {
+        message.textContent = `Hi ${name}! 👋`;
+      } else {
+        message.textContent = "Hi mysterious person 👀";
+      }
+
+      // Optional: disable buttons after use
+      yesBtn.disabled = true;
+      fakeNoBtn.disabled = true;
+    }
+
+    // Real yes
+    yesBtn.addEventListener("click", askNameAndGreet);
+
+    // Fake no → turns into YES, then works like yes
+    fakeNoBtn.addEventListener("click", function () {
+      fakeNoBtn.textContent = "YES";
+      fakeNoBtn.style.fontWeight = "bold";
+
+      fakeNoBtn.removeEventListener("click", arguments.callee);
+      fakeNoBtn.addEventListener("click", askNameAndGreet);
+    });
+  </script>
+</body>
+</html>
