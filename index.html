@@ -32,6 +32,11 @@
       cursor: pointer;
       margin: 10px 10px 0 0;
     }
+
+    #message {
+      font-size: 24px;
+      margin-top: 20px;
+    }
   </style>
 </head>
 
@@ -50,15 +55,19 @@
     const fakeNoBtn = document.getElementById("fakeNoBtn");
     const content = document.getElementById("content");
 
-    function startFlow() {
+    function askName() {
+      const name = prompt("What’s your name?");
+      if (!name || name.trim() === "") return;
+
       content.innerHTML = `
-        <p class="Question">Do you have a name?</p>
-        <button id="nameYes">Yes</button>
-        <button id="nameNo">No</button>
+        <p id="message">Hi ${name} 👋</p>
+        <p class="Question">Are you existing?</p>
+        <button id="existYes">Yes</button>
+        <button id="existNo">No</button>
       `;
 
-      document.getElementById("nameYes").onclick = existResponse;
-      document.getElementById("nameNo").onclick = existResponse;
+      document.getElementById("existYes").onclick = existResponse;
+      document.getElementById("existNo").onclick = existResponse;
 
       yesBtn.disabled = true;
       fakeNoBtn.disabled = true;
@@ -66,16 +75,17 @@
 
     function existResponse() {
       content.innerHTML += `<p class="Question">wow you exist?</p>`;
-      document.getElementById("nameYes").disabled = true;
-      document.getElementById("nameNo").disabled = true;
+      document.getElementById("existYes").disabled = true;
+      document.getElementById("existNo").disabled = true;
     }
 
-    yesBtn.onclick = startFlow;
+    yesBtn.onclick = askName;
 
     fakeNoBtn.onclick = function () {
       fakeNoBtn.textContent = "YES";
       fakeNoBtn.style.fontWeight = "bold";
-      fakeNoBtn.onclick = startFlow;
+
+      fakeNoBtn.onclick = askName;
     };
   </script>
 </body>
